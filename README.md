@@ -1,5 +1,5 @@
 # dingdong
-A simple feedback popup (client-side only).
+A simple feedback popup (client-side only). [Give it a try here!](https://cdn.rawgit.com/pqvst/dingdong/6779c5ae/demo.html)
 
 ![Demo](https://cdn.rawgit.com/pqvst/dingdong/ec807675/demo.gif)
 
