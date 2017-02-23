@@ -1,0 +1,111 @@
+
+#dingdong-button {
+	position: fixed;
+	visibility: visible !important;
+	cursor: pointer;
+	width: auto;
+	border: 0;
+	font-size: 14px;
+	background: #2C2C2C;
+	color: #FFFFFF;
+	margin: 0;
+	z-index: 100;
+	right: 0 !important;
+	top: 100px !important;
+	bottom: auto;
+	padding: 5px 11px 5px 12px !important;
+	opacity: 0.96 !important;
+	-webkit-border-radius: 2px 3px 0 0 !important;
+	   -moz-border-radius: 2px 3px 0 0 !important;
+			border-radius: 2px 3px 0 0 !important;
+	-webkit-transform: rotate(-90deg);
+		-ms-transform: rotate(-90deg);
+			transform: rotate(-90deg);
+	-webkit-transform-origin: 100% 100%;
+		-ms-transform-origin: 100% 100%;
+			transform-origin: 100% 100%;
+}
+
+#dingdong {
+	visibility: visible !important;
+	display: none;
+}
+
+#dingdong-overlay {
+	position: fixed;
+	z-index: 99998;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+	/* customize overlay background here */
+	background: rgba(255,255,255,0.8);
+	
+	/* padding for mobile niceness */
+	padding: 15px;
+	
+	/* overflow for really small screens */
+	overflow: auto;
+}
+
+#dingdong-box {
+	position: relative;
+	z-index: 99999;
+	max-width: 500px;
+	overflow: hidden;
+	margin: 75px auto 0 auto;
+	
+	/* customize box look here */
+	border-radius: 5px;
+	background: white;
+	-webkit-box-shadow: 0px 0px 30px -1px rgba(0,0,0,0.5);
+	   -moz-box-shadow: 0px 0px 30px -1px rgba(0,0,0,0.5);
+			box-shadow: 0px 0px 30px -1px rgba(0,0,0,0.5);
+}
+
+#dingdong-close {
+	position: absolute;
+	top: 5px;
+	right: 7px;
+	padding: 3px;
+	
+	/* customize x button here */
+	color: #aaa;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+#dingdong-form,
+#dingdong-form fieldset {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+#dingdong-form textarea,
+#dingdong-form input,
+#dingdong-form button {
+	font-family: sans-serif;
+	font-size: 20px;
+	width: 100%;
+	border: none;
+	padding: 20px;
+	outline: 0;
+}
+
+#dingdong-form textarea {
+	border-bottom: solid 1px #ddd;
+	overflow: auto;
+	
+	/* prevent resizing width */
+	min-width: 100%;
+	max-width: 100%;
+}
+
+#dingdong-submit {
+	background: #f79d07;
+	color: white;
+	cursor: pointer;
+}
