@@ -1,7 +1,7 @@
 
 #dingdong-button {
+	display: block !important;
 	position: fixed;
-	visibility: visible !important;
 	cursor: pointer;
 	width: auto;
 	border: 0;
@@ -27,7 +27,6 @@
 }
 
 #dingdong {
-	visibility: visible !important;
 	display: none;
 }
 

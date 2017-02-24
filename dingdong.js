@@ -14,11 +14,11 @@
 	$.dingdong = function(handler) {
 
 		$("body").append(
-			$("<button />", { id: "dingdong-button", style: { visibility: "hidden" }, text: "Feedback" })
+			$("<button />", { id: "dingdong-button", style: "display: none", text: "Feedback" })
 		);
 		
 		$("body").append(
-			$("<div/>", { id: "dingdong", style: { visibility: "hidden" } }).append(
+			$("<div/>", { id: "dingdong", style: "display: none" }).append(
 				$("<div/>", { id: "dingdong-overlay" }),
 				$("<div/>", { id: "dingdong-box" }).append(
 					$("<div/>", { id: "dingdong-close", text: "\u00D7" }),
