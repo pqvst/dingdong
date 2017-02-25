@@ -9,7 +9,7 @@
 	background: #2C2C2C;
 	color: #FFFFFF;
 	margin: 0;
-	z-index: 100;
+	z-index: 99998;
 	right: 0 !important;
 	top: 100px !important;
 	bottom: auto;
@@ -28,39 +28,23 @@
 
 #dingdong {
 	position: fixed;
-	z-index: 99997;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	z-index: 99999;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
 	display: none;
-}
 
-#dingdong-overlay {
-	position: fixed;
-	z-index: 99998;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	
-	/* customize overlay background here */
-	background: rgba(255,255,255,0.8);
-	
-	/* padding for mobile niceness */
-	padding: 15px;
-	
 	/* overflow for really small screens */
 	overflow: auto;
+
+	/* customize overlay background here */
+	background: rgba(255,255,255,0.8);
 }
 
 #dingdong-box {
-	z-index: 99999;
 	position: relative;
 	max-width: 500px;
-	overflow: hidden;
 	margin: 75px auto 0 auto;
-	
+
 	/* customize box look here */
 	border-radius: 5px;
 	background: white;
@@ -74,7 +58,7 @@
 	top: 5px;
 	right: 7px;
 	padding: 3px;
-	
+
 	/* customize x button here */
 	color: #aaa;
 	font-weight: bold;
@@ -82,28 +66,55 @@
 	font-size: 20px;
 }
 
-#dingdong-form,
-#dingdong-form fieldset {
+#dingdong-form {
 	padding: 0;
 	margin: 0;
 	border: 0;
 }
 
-#dingdong-form textarea,
-#dingdong-form input,
-#dingdong-form button {
+#dingdong-form {
 	font-family: sans-serif;
 	font-size: 20px;
-	width: 100%;
+}
+
+#dingdong-form textarea,
+#dingdong-form button,
+#dingdong-form input[type="text"],
+#dingdong-form input[type="email"],
+#dingdong-form label {
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
 	border: none;
-	padding: 20px;
 	outline: 0;
+	padding: 20px;
+	display: block;
+	box-sizing: border-box;
+}
+
+#dingdong-form label {
+	cursor: pointer;
+}
+
+#dingdong-form input[type="checkbox"] {
+	position: relative;
+	top: 2px;
+	float: right;
+}
+
+#dingdong-form textarea,
+#dingdong-form input[type="email"],
+#dingdong-form button {
+	width: 100%;
+}
+
+#dingdong-form .dingdong-row + .dingdong-row {
+	border-top: solid 1px #ddd;
 }
 
 #dingdong-form textarea {
-	border-bottom: solid 1px #ddd;
 	overflow: auto;
-	
+
 	/* prevent resizing width */
 	min-width: 100%;
 	max-width: 100%;
