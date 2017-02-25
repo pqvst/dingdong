@@ -32,6 +32,7 @@
 	top: 0; bottom: 0;
 	left: 0; right: 0;
 	display: none;
+	padding: 10px;
 
 	/* overflow for really small screens */
 	overflow: auto;
@@ -43,7 +44,10 @@
 #dingdong-box {
 	position: relative;
 	max-width: 500px;
-	margin: 75px auto 0 auto;
+	margin: 75px auto 15px auto;
+
+	/* so that content gets "rounded" by border */
+	overflow: hidden;
 
 	/* customize box look here */
 	border-radius: 5px;
