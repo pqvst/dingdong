@@ -121,11 +121,11 @@
 		}
 
 		$("#dingdong-button").click(function () {
-			$("#dingdong").show();
+			$.dingdongShow();
 		});
 
 		$("#dingdong, #dingdong-close").click(function () {
-			$("#dingdong").hide();
+			$.dingdongCancel();
 		});
 
 		$("#dingdong-box").click(function (e) {
@@ -139,10 +139,7 @@
 				email: $("#dingdong-email").val()
 			};
 			function callback(err) {
-				if (!err) {
-					$("#dingdong").hide();
-					$("#dingdong-message").val("");
-				}
+				if (!err) { $.dingdongHide(); }
 			}
 			if (opts.handler) {
 				opts.handler(data, callback);
