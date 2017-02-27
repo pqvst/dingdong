@@ -15,8 +15,28 @@
 		$("#dingdong").show();
 	}
 
-	$.dingdong = function(endpointOrHandler) {
-
+	$.dingdong = function(options) {
+		
+		var opts = {};
+		if (options) {
+			if ($.type(options) === "object") {
+				opts = options;
+			} else if ($.type(options) === "string") {
+				opts.endpoint = options;
+			} else if ($.type(options) === "function") {
+				opts.handler = options;
+			} else {
+				console.error("dingdong argument should be object (options), string (custom endpoint), or function (custom handler) :/");
+			}
+		}
+		
+		var header;
+		if (opts.header) {
+			header = $("<div/>", { "class": "dingdong-row" }).append(
+						$("<div/>", { id: "dingdong-header", html: opts.header })
+			);
+		}
+		
 		$("body").append(
 			$("<button />", { id: "dingdong-button", style: "display: none", text: "Feedback" })
 		);
@@ -26,6 +46,7 @@
 				$("<div/>", { id: "dingdong-box" }).append(
 					$("<div/>", { id: "dingdong-close", text: "\u00D7" }),
 					$("<form/>", { id: "dingdong-form" }).append(
+						header,
 						$("<div/>", { "class": "dingdong-row" }).append(
 							$("<input/>", { id: "dingdong-email", name: "email", type: "email", placeholder: "Your email address", required: "required" })
 						),
@@ -68,15 +89,11 @@
 					$("#dingdong-message").val("");
 				}
 			}
-			if (endpointOrHandler) {
-				if ($.type(endpointOrHandler) === "string") {
-					defaultHandler(endpointOrHandler, data, callback);
-				} else if ($.type(endpointOrHandler) === "function") {
-					endpointOrHandler(data, callback);
-				} else {
-					console.error("dingdong argument should be null (default handler), string (custom endpoint), or function (custom handler) :/");
-				}
-			} else {
+			if (opts.handler) {
+				opts.handler(data, callback);
+			} else if (opts.endpoint) {
+				defaultHandler(opts.endpoint, data, callback);
+			} else { 
 				defaultHandler("/dingdong", data, callback);
 			}
 			return false;
