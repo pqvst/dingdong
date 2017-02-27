@@ -84,7 +84,11 @@
 						$("<div/>", { id: "dingdong-header", html: opts.header })
 			);
 		}
-		
+
+		// remove existing if $.dingdong has already been called
+		$("#dingdong-button").remove();
+		$("#dingdong").remove();
+
 		$("body").append(
 			$("<button />", { id: "dingdong-button", style: "display: none", text: "Feedback" })
 		);
