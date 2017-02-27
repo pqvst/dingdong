@@ -1,7 +1,7 @@
 (function($) {
 
-	function defaultHandler(data, callback) {
-		$.post("/dingdong", data)
+	function defaultHandler(endpoint, data, callback) {
+		$.post(endpoint, data)
 			.done(function () {
 		    callback();
 		  })
@@ -15,7 +15,7 @@
 		$("#dingdong").show();
 	}
 
-	$.dingdong = function(handler) {
+	$.dingdong = function(endpointOrHandler) {
 
 		$("body").append(
 			$("<button />", { id: "dingdong-button", style: "display: none", text: "Feedback" })
@@ -62,12 +62,23 @@
 				email: $("#dingdong-email").val(),
 				//subscribe: $("#dingdong-subscribe").is(":checked")
 			};
-			(handler || defaultHandler)(data, function (err) {
+			function callback(err) {
 				if (!err) {
 					$("#dingdong").hide();
 					$("#dingdong-message").val("");
 				}
-			});
+			}
+			if (endpointOrHandler) {
+				if ($.type(endpointOrHandler) === "string") {
+					defaultHandler(endpointOrHandler, data, callback);
+				} else if ($.type(endpointOrHandler) === "function") {
+					endpointOrHandler(data, callback);
+				} else {
+					console.error("dingdong argument should be null (default handler), string (custom endpoint), or function (custom handler) :/");
+				}
+			} else {
+				defaultHandler("/dingdong", data, callback);
+			}
 			return false;
 		});
 

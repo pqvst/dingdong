@@ -29,13 +29,19 @@ A simple feedback popup (client-side only). [Give it a try here!](https://rawgit
 When initializing dingdong you can pass an optional custom handler.
 
 ```js
-$.dingdong([handler]);
+$.dingdong([endpoint|handler]);
 ```
 
-The default handler will perform an AJAX POST to /dingdong with the message and email address.
+The default handler will perform an AJAX POST (form encoded) to /dingdong with the message and email address.
 
 ```js
 $.dingdong();
+```
+
+A custom endpoint for the default AJAX POST can be specified.
+
+```js
+$.dingdong("/my-dingdong");
 ```
 
 A custom handler lets you perform whatever action you'd like. 

@@ -24,11 +24,14 @@
 	<script type="text/javascript">
 
 		// initialize with default handler (POST /dingdong)
-		// $.dingdong();
+		//$.dingdong();
+		
+		// initialize with custom endpoint
+		// $.dingdong("/my-dingdong");
 
-		// ... or initialize with custom handler
+		// initialize with custom handler
 		$.dingdong(function (data, callback) {
-			alert(["Email:", data.email, "", "Message:", data.message, "", "Subscribe:", data.subscribe, ""].join("\n"));
+			alert(["Email:", data.email, "", "Message:", data.message, ""].join("\n"));
 			callback();
 		});
 
