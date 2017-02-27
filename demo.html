@@ -66,8 +66,10 @@
 		$.dingdong({
 			fade: true,
 			handler: function (data, callback) {
-				alert(JSON.stringify(data));
-				callback();
+				console.log(data);
+				setTimeout(function () {
+					callback(data.message == "err");
+				}, 1000);
 			}
 		});
 
