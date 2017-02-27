@@ -16,7 +16,8 @@
 	}
 
 	$.dingdong = function(options) {
-		
+
+		// parse options
 		var opts = {};
 		if (options) {
 			if ($.type(options) === "object") {
@@ -29,7 +30,25 @@
 				console.error("dingdong argument should be object (options), string (custom endpoint), or function (custom handler) :/");
 			}
 		}
-		
+
+		// fade options
+		var fade = !!opts.fade;
+		var fadeOpen = opts.openFadeDuration || 100;
+		var fadeCancel = opts.cancelFadeDuration || 100;
+		var fadeSubmit = opts.submitFadeDuration || 1000;
+
+		// custom text options
+		var buttonText = opts.buttonText = "Feedback";
+		var emailPlaceholder = opts.emailPlaceholder || "Your email address";
+		var messagePlaceholder = opts.messagePlaceholder || "Send us your feedback or report an issue";
+		var submitButtonText = opts.submitButtonText || "Send message";
+		var submittedText = opts.submittedText || "Thanks!";
+
+		// misc
+		var messageRows = opts.messageRows || 7;
+		var disableEscapeToCancel = !!opts.disableEscapeToCancel;
+		var endpoint = opts.endpoint || "/dingdong";
+
 		var header;
 		if (opts.header) {
 			header = $("<div/>", { "class": "dingdong-row" }).append(
