@@ -26,35 +26,65 @@ A simple feedback popup (client-side only). [Give it a try here!](https://rawgit
 
 ## Usage
 
-When initializing dingdong you can pass an optional custom handler.
-
 ```js
-$.dingdong([endpoint|handler]);
-```
-
-The default handler will perform an AJAX POST (form encoded) to /dingdong with the message and email address.
-
-```js
+// initialize with default handler (POST to /dingdong)
 $.dingdong();
-```
 
-A custom endpoint for the default AJAX POST can be specified.
-
-```js
+// initialize with custom endpoint
 $.dingdong("/my-dingdong");
-```
 
-A custom handler lets you perform whatever action you'd like. 
-- `data` is an object containing `message` and `email`.
-- `callback` is a function that you should once you're done.
-
-```js
+// initialize with custom handler
 $.dingdong(function (data, callback) {
-  alert(["Email:", data.email, "", "Message:", data.message, ""].join("\n"));
-  callback();
+	alert(JSON.stringify(data));
+	callback();
+});
+
+$.dingdong(function (data, callback) {
+	// note: return a non-null value if an error occurred
+	callback("error!!!");
+})
+
+// initialize with custom options
+$.dingdong({
+	header: "<b>Yoooooooooo!</b>", 
+	fade: true,
+	openFadeDuration: 1000,
+	cancelFadeDuration: 200,
+	submitFadeDuration: 1000,
+	buttonText: "Heeeeelp!",
+	emailPlaceholder: "foo@bar.com",
+	messagePlaceholder: "What do you want?",
+	submitButtonText: "Goooo!",
+	submittedText: "Danke!",
+	messageRows: 2,
+	disableEscapeToCancel: false,
+	endpoint: "/yo-mama",
+	handler: function (data, callback) {
+		// note: handler takes precedence over endpoint
+		console.log(data);
+		callback();
+	}
+});
+
+// default options:
+$.dingdong({
+	header: null
+	fade: false,
+	openFadeDuration: 100,
+	cancelFadeDuration: 100,
+	submitFadeDuration: 1000,
+	buttonText: "Feedback",
+	emailPlaceholder: "Your email address",
+	messagePlaceholder: "Send us your feedback or report an issue",
+	submitButtonText: "Send message",
+	submittedText: "Thanks!",
+	messageRows: 7,
+	endpoint: "/dingdong",
+	handler: null
 });
 ```
 
+## Custom Handler
 For example, you could perform a custom POST like this:
 
 ```js
