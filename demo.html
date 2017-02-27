@@ -62,6 +62,15 @@
 			}
 		});
 
+		// initialize simple for demo purposes
+		$.dingdong({
+			fade: true,
+			handler: function (data, callback) {
+				alert(JSON.stringify(data));
+				callback();
+			}
+		});
+
 	</script>
 
 </body>
