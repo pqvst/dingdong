@@ -105,11 +105,6 @@
 						$("<div/>", { "class": "dingdong-row" }).append(
 							$("<textarea/>", { id: "dingdong-message", name: "message", rows: messageRows, placeholder: messagePlaceholder, required: "required" })
 						),
-						/*$("<div/>", { "class": "dingdong-row" }).append(
-							$("<label/>", { for: "dingdong-subscribe", text: "Subscribe to newsletter" }).append(
-								$("<input/>", { id: "dingdong-subscribe", name: "subscribe", type: "checkbox" })
-							)
-						),*/
 						$("<button/>", { id: "dingdong-submit", type: "submit", text: submitButtonText })
 					)
 				)
@@ -141,8 +136,7 @@
 			e.preventDefault();
 			var data = {
 				message: $("#dingdong-message").val(),
-				email: $("#dingdong-email").val(),
-				//subscribe: $("#dingdong-subscribe").is(":checked")
+				email: $("#dingdong-email").val()
 			};
 			function callback(err) {
 				if (!err) {
