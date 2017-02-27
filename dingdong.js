@@ -90,7 +90,7 @@
 		$("#dingdong").remove();
 
 		$("body").append(
-			$("<button />", { id: "dingdong-button", style: "display: none", text: "Feedback" })
+			$("<button />", { id: "dingdong-button", style: "display: none", text: buttonText })
 		);
 
 		$("body").append(
@@ -100,17 +100,17 @@
 					$("<form/>", { id: "dingdong-form" }).append(
 						header,
 						$("<div/>", { "class": "dingdong-row" }).append(
-							$("<input/>", { id: "dingdong-email", name: "email", type: "email", placeholder: "Your email address", required: "required" })
+							$("<input/>", { id: "dingdong-email", name: "email", type: "email", placeholder: emailPlaceholder, required: "required" })
 						),
 						$("<div/>", { "class": "dingdong-row" }).append(
-							$("<textarea/>", { id: "dingdong-message", name: "message", rows: "7", placeholder: "Send us your feedback or report an issue", required: "required" })
+							$("<textarea/>", { id: "dingdong-message", name: "message", rows: messageRows, placeholder: messagePlaceholder, required: "required" })
 						),
 						/*$("<div/>", { "class": "dingdong-row" }).append(
 							$("<label/>", { for: "dingdong-subscribe", text: "Subscribe to newsletter" }).append(
 								$("<input/>", { id: "dingdong-subscribe", name: "subscribe", type: "checkbox" })
 							)
 						),*/
-						$("<button/>", { id: "dingdong-submit", type: "submit", text: "Send Message" })
+						$("<button/>", { id: "dingdong-submit", type: "submit", text: submitButtonText })
 					)
 				)
 			)
