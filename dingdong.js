@@ -11,6 +11,10 @@
 		  });
 	}
 
+	$.dingdongShow = function () {
+		$("#dingdong").show();
+	}
+
 	$.dingdong = function(handler) {
 
 		$("body").append(
