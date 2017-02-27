@@ -78,6 +78,7 @@
 			$("#dingdong-submit").text(submittedText).prop("disabled", true);
 		}
 
+		// maybe build header option
 		var header;
 		if (opts.header) {
 			header = $("<div/>", { "class": "dingdong-row" }).append(
@@ -89,10 +90,12 @@
 		$("#dingdong-button").remove();
 		$("#dingdong").remove();
 
+		// add dingdong button
 		$("body").append(
 			$("<button />", { id: "dingdong-button", style: "display: none", text: buttonText })
 		);
 
+		// add dingdong modal
 		$("body").append(
 			$("<div/>", { id: "dingdong", style: "display: none" }).append(
 				$("<div/>", { id: "dingdong-box" }).append(
@@ -120,18 +123,23 @@
 			});
 		}
 
+		// show dingdong when button is clicked
 		$("#dingdong-button").click(function () {
 			$.dingdongShow();
 		});
 
+		// cancel dingdong when backdrop or close is clicked
 		$("#dingdong, #dingdong-close").click(function () {
 			$.dingdongCancel();
 		});
 
+		// prevent clicks inside the box from propagating
+		// (otherwise any click inside will trigger above cancel)
 		$("#dingdong-box").click(function (e) {
 			e.stopPropagation();
 		});
 
+		// handle form submission (prevent default behavior since ajax)
 		$("#dingdong-form").submit(function (e) {
 			e.preventDefault();
 			var data = {
