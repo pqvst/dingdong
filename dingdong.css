@@ -80,7 +80,7 @@
 #dingdong-header a {
 	color: inherit;
 	text-decoration: none;
-	border-bottom: dotted 1px #222;
+	border-bottom: dotted 1px inherit;
 }
 
 #dingdong-form {
@@ -105,18 +105,16 @@
 	border: none;
 	outline: 0;
 	padding: 20px;
-	display: block;
 	box-sizing: border-box;
 }
 
-#dingdong-form label {
-	cursor: pointer;
+#dingdong-form input + input {
+	border-left: solid 1px #ddd !important;
 }
 
-#dingdong-form input[type="checkbox"] {
-	position: relative;
-	top: 2px;
-	float: right;
+#dingdong-form label {
+	display: block;
+	cursor: pointer;
 }
 
 #dingdong-form textarea,
@@ -132,9 +130,16 @@
 #dingdong-form textarea {
 	overflow: auto;
 
+	/* get rid of spacing below */
+	display: block;
+
 	/* prevent resizing width */
 	min-width: 100%;
 	max-width: 100%;
+}
+
+#dingdong-name-row {
+	display: none;
 }
 
 #dingdong-submit {

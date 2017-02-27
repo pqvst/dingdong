@@ -39,18 +39,41 @@
 		var messagePlaceholder = opts.messagePlaceholder || "Send us your feedback or report an issue";
 		var submitButtonText = opts.submitButtonText || "Send message";
 		var submittedText = opts.submittedText || "Thanks!";
+		var subscribeButtonText = opts.subscribeButtonText || "Subscribe";
+		var fnamePlaceholder = opts.fnamePlaceholder || "First name";
+		var lnamePlaceholder = opts.lnamePlaceholder || "Last name";
 
 		// misc
 		var messageRows = opts.messageRows || 7;
 		var disableEscapeToCancel = !!opts.disableEscapeToCancel;
 		var endpoint = opts.endpoint || "/dingdong";
+		var showSubscribe = !!opts.showSubscribe;
+		var showMessage = !!opts.showMessage;
 
 		// helper function for showing
-		$.dingdongShow = function () {
+		$.dingdongShow = function (mode) {
 			$("#dingdong-submit").prop("disabled", false);
 			$("#dingdong-submit").text(submitButtonText);
 			$("#dingdong-message").val("");
-			// intentionally dont clear email (reuse if submitting more than one issue)
+			// intentionally dont clear email, fname, lname
+
+			if (mode === "subscribeOnly") {
+				$("#dingdong-subscribe").prop("checked", true);
+				$("#dingdong-name-row").show();
+				$("#dingdong-subscribe-row").hide();
+				$("#dingdong-message-row").hide();
+				$("#dingdong-submit").text(subscribeButtonText);
+			} else {
+				$("#dingdong-subscribe").prop("checked", false);
+				$("#dingdong-name-row").hide();
+				if (mode == "messageOnly") {
+					$("#dingdong-subscribe-row").hide();
+				} else {
+					$("#dingdong-subscribe-row").show();
+				}
+				$("#dingdong-message-row").show();
+				$("#dingdong-submit").text(submitButtonText);
+			}
 
 			if (fade) {
 				$("#dingdong").fadeIn(fadeOpen);
@@ -81,10 +104,50 @@
 		// maybe build header option
 		var header;
 		if (opts.header) {
-			header = $("<div/>", { "class": "dingdong-row" }).append(
-						$("<div/>", { id: "dingdong-header", html: opts.header })
-			);
+			header = [
+				$("<div/>", { "class": "dingdong-row" }).append(
+					$("<div/>", { id: "dingdong-header", html: opts.header })
+				)
+			];
 		}
+
+		// maybe build subscribe section
+		var subscribe;
+		if (showSubscribe) {
+			subscribe = [
+				$("<div/>", { id: "dingdong-subscribe-row", "class": "dingdong-row" }).append(
+					$("<label/>", { for: "dingdong-subscribe", text: "Subscribe to newsletter" }).append(
+						$("<span/>", { "class": "dingdong-switch" }).append(
+							$("<input/>", { id: "dingdong-subscribe", name: "subscribe", type: "checkbox" }),
+							$("<div/>", { "class": "dingdong-switch-slider" })
+						)
+					)
+				),
+				$("<div/>", { id: "dingdong-name-row", "class": "dingdong-row" }).append(
+					$("<input/>", { id: "dingdong-fname", name: "fname", type: "text", placeholder: fnamePlaceholder, required: "required", width: "50%" }),
+					$("<input/>", { id: "dingdong-lname", name: "lname", type: "text", placeholder: lnamePlaceholder, required: "required", width: "50%" })
+				)
+			];
+		}
+
+		var message;
+		if (showMessage) {
+			message = [
+				$("<div/>", { id: "dingdong-message-row", "class": "dingdong-row" }).append(
+					$("<textarea/>", { id: "dingdong-message", name: "message", rows: messageRows, placeholder: messagePlaceholder, required: "required" })
+				)
+			];
+		}
+
+		var email = [
+			$("<div/>", { "class": "dingdong-row" }).append(
+				$("<input/>", { id: "dingdong-email", name: "email", type: "email", placeholder: emailPlaceholder, required: "required" })
+			)
+		];
+
+		var submit = [
+			$("<button/>", { id: "dingdong-submit", type: "submit", text: submitButtonText })
+		];
 
 		// remove existing if $.dingdong has already been called
 		$("#dingdong-button").remove();
@@ -102,13 +165,10 @@
 					$("<div/>", { id: "dingdong-close", text: "\u00D7" }),
 					$("<form/>", { id: "dingdong-form" }).append(
 						header,
-						$("<div/>", { "class": "dingdong-row" }).append(
-							$("<input/>", { id: "dingdong-email", name: "email", type: "email", placeholder: emailPlaceholder, required: "required" })
-						),
-						$("<div/>", { "class": "dingdong-row" }).append(
-							$("<textarea/>", { id: "dingdong-message", name: "message", rows: messageRows, placeholder: messagePlaceholder, required: "required" })
-						),
-						$("<button/>", { id: "dingdong-submit", type: "submit", text: submitButtonText })
+						email,
+						message,
+						subscribe,
+						submit
 					)
 				)
 			)
@@ -122,6 +182,18 @@
 		    }
 			});
 		}
+
+		// toggle name fields when subscribe checkbox changes
+		$("#dingdong-subscribe").change(function () {
+			var checked = $(this).is(":checked");
+			if (checked) {
+				$("#dingdong-name-row").slideDown();
+			} else {
+				$("#dingdong-name-row").slideUp();
+			}
+			$("#dingdong-fname").prop("required", checked);
+			$("#dingdong-lname").prop("required", checked);
+		});
 
 		// show dingdong when button is clicked
 		$("#dingdong-button").click(function () {
@@ -144,7 +216,10 @@
 			e.preventDefault();
 			var data = {
 				message: $("#dingdong-message").val(),
-				email: $("#dingdong-email").val()
+				email: $("#dingdong-email").val(),
+				subscribe: $("#dingdong-subscribe").is(":checked"),
+				fname: $("#dingdong-fname").val(),
+				lname: $("#dingdong-lname").val()
 			};
 			function callback(err) {
 				if (!err) { $.dingdongHide(); }
