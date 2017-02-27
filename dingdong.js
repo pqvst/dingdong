@@ -11,10 +11,6 @@
 		  });
 	}
 
-	$.dingdongShow = function () {
-		$("#dingdong").show();
-	}
-
 	$.dingdong = function(options) {
 
 		// parse options
@@ -48,6 +44,39 @@
 		var messageRows = opts.messageRows || 7;
 		var disableEscapeToCancel = !!opts.disableEscapeToCancel;
 		var endpoint = opts.endpoint || "/dingdong";
+
+		// helper function for showing
+		$.dingdongShow = function () {
+			$("#dingdong-submit").prop("disabled", false);
+			$("#dingdong-submit").text(submitButtonText);
+			$("#dingdong-message").val("");
+			// intentionally dont clear email (reuse if submitting more than one issue)
+
+			if (fade) {
+				$("#dingdong").fadeIn(fadeOpen);
+			} else {
+				$("#dingdong").show();
+			}
+		}
+
+		// helper function for canceling
+		$.dingdongCancel = function () {
+			if (fade) {
+				$("#dingdong").fadeOut(fadeCancel);
+			} else {
+				$("#dingdong").hide();
+			}
+		}
+
+		// helper function for hiding (aka after submit)
+		$.dingdongHide = function () {
+			if (fade) {
+				$("#dingdong").fadeOut(fadeSubmit);
+			} else {
+				$("#dingdong").hide();
+			}
+			$("#dingdong-submit").text(submittedText).prop("disabled", true);
+		}
 
 		var header;
 		if (opts.header) {
