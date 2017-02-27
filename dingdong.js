@@ -151,10 +151,8 @@
 			}
 			if (opts.handler) {
 				opts.handler(data, callback);
-			} else if (opts.endpoint) {
+			} else {
 				defaultHandler(opts.endpoint, data, callback);
-			} else { 
-				defaultHandler("/dingdong", data, callback);
 			}
 			return false;
 		});
