@@ -116,6 +116,15 @@
 			)
 		);
 
+		// maybe listen for esc to cancel
+		if (!disableEscapeToCancel) {
+			$(document).keydown(function(e) {
+		    if (e.keyCode == 27) {
+		        $.dingdongCancel();
+		    }
+			});
+		}
+
 		$("#dingdong-button").click(function () {
 			$("#dingdong").show();
 		});
