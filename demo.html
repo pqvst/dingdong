@@ -23,30 +23,43 @@
 
 	<script type="text/javascript">
 
-		/*
-		// initialize with default handler (POST /dingdong)
+		// initialize with default handler (POST to /dingdong)
 		$.dingdong();
-		
+
 		// initialize with custom endpoint
 		$.dingdong("/my-dingdong");
-		$.dingdong({ 
-			endpoint: "/my-dingdong" 
-		});
-		
+
 		// initialize with custom handler
 		$.dingdong(function (data, callback) {
-			alert(["Email:", data.email, "", "Message:", data.message, ""].join("\n"));
+			alert(JSON.stringify(data));
 			callback();
 		});
-		$.dingdong({ 
-			handler: function () { ... } 
-		});
-		*/
-		
-		// initialize with header (and options)
+
+		$.dingdong(function (data, callback) {
+			// note: return a non-null value if an error occurred
+			callback("error!!!");
+		})
+
+		// initialize with custom options
 		$.dingdong({
-			endpoint: "/my-dingdong",
-			header: "<b>New places can be added instantly</b> via our <a href='#'>iPhone/iPad app</a>. (<a href='#'>Android app</a> coming soon!)",
+			header: "<b>Yoooooooooo!</b>",
+			fade: true,
+			openFadeDuration: 1000,
+			cancelFadeDuration: 200,
+			submitFadeDuration: 1000,
+			buttonText: "Heeeeelp!",
+			emailPlaceholder: "foo@bar.com",
+			messagePlaceholder: "What do you want?",
+			submitButtonText: "Goooo!",
+			submittedText: "Danke!",
+			messageRows: 2,
+			disableEscapeToCancel: false,
+			endpoint: "/yo-mama",
+			handler: function (data, callback) {
+				// note: handler takes precedence over endpoint
+				console.log(data);
+				callback();
+			}
 		});
 
 	</script>
