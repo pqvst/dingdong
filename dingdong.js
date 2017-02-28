@@ -28,7 +28,7 @@
 		}
 
 		// fade options
-		var fade = !!opts.fade;
+		var fade = opts.fade !== false;
 		var fadeOpen = opts.openFadeDuration || 100;
 		var fadeCancel = opts.cancelFadeDuration || 100;
 		var fadeSubmit = opts.submitFadeDuration || 1000;
@@ -42,13 +42,12 @@
 		var subscribeButtonText = opts.subscribeButtonText || "Subscribe";
 		var fnamePlaceholder = opts.fnamePlaceholder || "First name";
 		var lnamePlaceholder = opts.lnamePlaceholder || "Last name";
+		var subscribeLabel = opts.subscribeLabel || "Subscribe to newsletter";
 
 		// misc
 		var messageRows = opts.messageRows || 7;
-		var disableEscapeToCancel = !!opts.disableEscapeToCancel;
+		var escapeToCancel = opts.disableEscapeToCancel !== false;
 		var endpoint = opts.endpoint || "/dingdong";
-		var showSubscribe = !!opts.showSubscribe;
-		var showMessage = !!opts.showMessage;
 
 		// helper function for showing
 		$.dingdongShow = function (mode) {
