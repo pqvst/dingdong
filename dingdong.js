@@ -59,19 +59,25 @@
 			if (mode === "subscribeOnly") {
 				$("#dingdong-subscribe").prop("checked", true);
 				$("#dingdong-name-row").show();
-				$("#dingdong-subscribe-row").hide();
 				$("#dingdong-message-row").hide();
 				$("#dingdong-submit").text(subscribeButtonText);
+				$("#dingdong-fname").prop("required", true);
+				$("#dingdong-lname").prop("required", true);
+				$("#dingdong-message").prop("required", false);
 			} else {
 				$("#dingdong-subscribe").prop("checked", false);
 				$("#dingdong-name-row").hide();
-				if (mode == "messageOnly") {
-					$("#dingdong-subscribe-row").hide();
-				} else {
-					$("#dingdong-subscribe-row").show();
-				}
 				$("#dingdong-message-row").show();
 				$("#dingdong-submit").text(submitButtonText);
+				$("#dingdong-fname").prop("required", false);
+				$("#dingdong-lname").prop("required", false);
+				$("#dingdong-message").prop("required", true);
+			}
+
+			if (mode === "subscribeOnly" || mode === "messageOnly") {
+				$("#dingdong-subscribe-row").hide();
+			} else {
+				$("#dingdong-subscribe-row").show();
 			}
 
 			if (fade) {
@@ -97,7 +103,7 @@
 			} else {
 				$("#dingdong").hide();
 			}
-			$("#dingdong-submit").text(submittedText).prop("disabled", true);
+			$("#dingdong-submit").text(submittedText);
 		}
 
 		// maybe build header option
@@ -111,32 +117,26 @@
 		}
 
 		// maybe build subscribe section
-		var subscribe;
-		if (showSubscribe) {
-			subscribe = [
-				$("<div/>", { id: "dingdong-subscribe-row", "class": "dingdong-row" }).append(
-					$("<label/>", { for: "dingdong-subscribe", text: "Subscribe to newsletter" }).append(
-						$("<span/>", { "class": "dingdong-switch" }).append(
-							$("<input/>", { id: "dingdong-subscribe", name: "subscribe", type: "checkbox" }),
-							$("<div/>", { "class": "dingdong-switch-slider" })
-						)
+		var subscribe = [
+			$("<div/>", { id: "dingdong-subscribe-row", "class": "dingdong-row" }).append(
+				$("<label/>", { for: "dingdong-subscribe", text: subscribeLabel }).append(
+					$("<span/>", { "class": "dingdong-switch" }).append(
+						$("<input/>", { id: "dingdong-subscribe", name: "subscribe", type: "checkbox" }),
+						$("<div/>", { "class": "dingdong-switch-slider" })
 					)
-				),
-				$("<div/>", { id: "dingdong-name-row", "class": "dingdong-row" }).append(
-					$("<input/>", { id: "dingdong-fname", name: "fname", type: "text", placeholder: fnamePlaceholder, required: "required", width: "50%" }),
-					$("<input/>", { id: "dingdong-lname", name: "lname", type: "text", placeholder: lnamePlaceholder, required: "required", width: "50%" })
 				)
-			];
-		}
+			),
+			$("<div/>", { id: "dingdong-name-row", "class": "dingdong-row" }).append(
+				$("<input/>", { id: "dingdong-fname", name: "fname", type: "text", placeholder: fnamePlaceholder, width: "50%" }),
+				$("<input/>", { id: "dingdong-lname", name: "lname", type: "text", placeholder: lnamePlaceholder, width: "50%" })
+			)
+		];
 
-		var message;
-		if (showMessage) {
-			message = [
-				$("<div/>", { id: "dingdong-message-row", "class": "dingdong-row" }).append(
-					$("<textarea/>", { id: "dingdong-message", name: "message", rows: messageRows, placeholder: messagePlaceholder, required: "required" })
-				)
-			];
-		}
+		var message = [
+			$("<div/>", { id: "dingdong-message-row", "class": "dingdong-row" }).append(
+				$("<textarea/>", { id: "dingdong-message", name: "message", rows: messageRows, placeholder: messagePlaceholder, required: "required" })
+			)
+		];
 
 		var email = [
 			$("<div/>", { "class": "dingdong-row" }).append(
@@ -174,7 +174,7 @@
 		);
 
 		// maybe listen for esc to cancel
-		if (!disableEscapeToCancel) {
+		if (escapeToCancel) {
 			$(document).keydown(function(e) {
 		    if (e.keyCode == 27) {
 		        $.dingdongCancel();
