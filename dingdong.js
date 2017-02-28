@@ -46,7 +46,7 @@
 
 		// misc
 		var messageRows = opts.messageRows || 7;
-		var escapeToCancel = opts.disableEscapeToCancel !== false;
+		var escapeToCancel = opts.escapeToCancel !== false;
 		var endpoint = opts.endpoint || "/dingdong";
 
 		// helper function for showing
