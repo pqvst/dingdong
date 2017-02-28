@@ -44,6 +44,28 @@ $.dingdong(function (data, callback) {
 	callback("error!!!");
 })
 
+// default options:
+$.dingdong({
+	header: null
+	fade: true,
+	openFadeDuration: 100,
+	cancelFadeDuration: 100,
+	submitFadeDuration: 1000,
+	buttonText: "Feedback",
+	emailPlaceholder: "Your email address",
+	messagePlaceholder: "Send us your feedback or report an issue",
+	submitButtonText: "Send message",
+	submittedText: "Thanks!",
+	subscribeButtonText: "Subscribe",
+	fnamePlaceholder: "First name",
+	lnamePlaceholder: "Last name",
+	subscribeLabel: "Subscribe to newsletter",
+	messageRows: 7,
+	escapeToCancel: true,
+	endpoint: "/dingdong",
+	handler: null
+});
+
 // initialize with custom options
 $.dingdong({
 	header: "<b>Yoooooooooo!</b>", 
@@ -65,23 +87,26 @@ $.dingdong({
 		callback();
 	}
 });
+```
 
-// default options:
-$.dingdong({
-	header: null
-	fade: false,
-	openFadeDuration: 100,
-	cancelFadeDuration: 100,
-	submitFadeDuration: 1000,
-	buttonText: "Feedback",
-	emailPlaceholder: "Your email address",
-	messagePlaceholder: "Send us your feedback or report an issue",
-	submitButtonText: "Send message",
-	submittedText: "Thanks!",
-	messageRows: 7,
-	endpoint: "/dingdong",
-	handler: null
-});
+## Methods
+You can open an already initalized dingdong:
+
+```js
+$.dingdongShow();
+```
+
+Or open it with a different mode:
+
+```js
+$.dingdongShow("subscribeOnly"); /* hides message field */
+$.dingdongShow("messageOnly"); /* hides subscribe row */
+```
+
+You can also hide it:
+
+```js
+$.dingdongCancel();
 ```
 
 ## Custom Handler
