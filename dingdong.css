@@ -146,6 +146,10 @@
 	background: #f79d07;
 	color: white;
 	cursor: pointer;
+	transition: background-color .4s ease;
+}
+#dingdong-submit:disabled {
+	background: #ddd;
 }
 
 .dingdong-switch {

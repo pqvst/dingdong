@@ -222,8 +222,13 @@
 				lname: $("#dingdong-lname").val()
 			};
 			function callback(err) {
-				if (!err) { $.dingdongHide(); }
+				if (err) {
+					$("#dingdong-submit").prop("disabled", false);
+				} else {
+					$.dingdongHide();
+				}
 			}
+			$("#dingdong-submit").prop("disabled", true);
 			if (opts.handler) {
 				opts.handler(data, callback);
 			} else {
