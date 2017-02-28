@@ -21,6 +21,12 @@
 
 <body>
 
+	<div>
+		<button onclick="$.dingdong();$.dingdongShow();">Default</button>
+		<button onclick="$.dingdong();$.dingdongShow('messageOnly');">Default (Message Only)</button>
+		<button onclick="$.dingdong();$.dingdongShow('subscribeOnly');">Default (Subscribe Only)</button>
+	</div>
+
 	<script type="text/javascript">
 
 		// initialize with default handler (POST to /dingdong)
@@ -38,12 +44,12 @@
 		$.dingdong(function (data, callback) {
 			// note: return a non-null value if an error occurred
 			callback("error!!!");
-		})
+		});
 
 		// initialize with custom options
 		$.dingdong({
 			header: "<b>Yoooooooooo!</b>",
-			fade: true,
+			fade: false,
 			openFadeDuration: 1000,
 			cancelFadeDuration: 200,
 			submitFadeDuration: 1000,
@@ -53,7 +59,7 @@
 			submitButtonText: "Goooo!",
 			submittedText: "Danke!",
 			messageRows: 2,
-			disableEscapeToCancel: false,
+			escapeToCancel: false,
 			endpoint: "/yo-mama",
 			handler: function (data, callback) {
 				// note: handler takes precedence over endpoint
@@ -64,11 +70,11 @@
 
 		// initialize simple for demo purposes
 		$.dingdong({
-			fade: true,
 			handler: function (data, callback) {
 				console.log(data);
 				setTimeout(function () {
 					callback(data.message == "err");
+					alert("Error!");
 				}, 1000);
 			}
 		});
