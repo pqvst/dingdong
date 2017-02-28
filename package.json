@@ -1,6 +1,6 @@
 {
   "name": "dingdong",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple feedback popup (client-side only). [Give it a try here!](https://rawgit.com/pqvst/dingdong/master/demo.html)",
   "main": "dingdong.js",
   "scripts": {
