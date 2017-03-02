@@ -45,6 +45,8 @@
 		var subscribeLabel = opts.subscribeLabel || "Subscribe to newsletter";
 
 		// misc
+		var hideButton = !!opts.hideButton;
+		var alwaysOpen = !!opts.alwaysOpen;
 		var messageRows = opts.messageRows || 7;
 		var escapeToCancel = opts.escapeToCancel !== false;
 		var endpoint = opts.endpoint || "/dingdong";
@@ -144,20 +146,29 @@
 			$("<button/>", { id: "dingdong-submit", type: "submit", text: submitButtonText })
 		];
 
+		var close;
+		if (!alwaysOpen){
+			close = [
+				$("<div/>", { id: "dingdong-close", text: "\u00D7" })
+			];
+		}
+
 		// remove existing if $.dingdong has already been called
 		$("#dingdong-button").remove();
 		$("#dingdong").remove();
 
 		// add dingdong button
-		$("body").append(
-			$("<button />", { id: "dingdong-button", style: "display: none", text: buttonText })
-		);
+		if (!hideButton) {
+			$("body").append(
+				$("<button />", { id: "dingdong-button", style: "display: none", text: buttonText })
+			);
+		}
 
 		// add dingdong modal
 		$("body").append(
 			$("<div/>", { id: "dingdong", style: "display: none" }).append(
 				$("<div/>", { id: "dingdong-box" }).append(
-					$("<div/>", { id: "dingdong-close", text: "\u00D7" }),
+					close,
 					$("<form/>", { id: "dingdong-form" }).append(
 						header,
 						email,
@@ -170,7 +181,7 @@
 		);
 
 		// maybe listen for esc to cancel
-		if (escapeToCancel) {
+		if (!alwaysOpen && escapeToCancel) {
 			$(document).keydown(function(e) {
 		    if (e.keyCode == 27) {
 		        $.dingdongCancel();
@@ -194,9 +205,11 @@
 		});
 
 		// cancel dingdong when backdrop or close is clicked
-		$("#dingdong, #dingdong-close").click(function () {
-			$.dingdongCancel();
-		});
+		if (!alwaysOpen) {
+			$("#dingdong, #dingdong-close").click(function () {
+				$.dingdongCancel();
+			});
+		}
 
 		// prevent clicks inside the box from propagating
 		// (otherwise any click inside will trigger above cancel)
