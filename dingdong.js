@@ -186,8 +186,6 @@
 			} else {
 				$("#dingdong-name-row").slideUp();
 			}
-			$("#dingdong-fname").prop("required", checked);
-			$("#dingdong-lname").prop("required", checked);
 		});
 
 		// show dingdong when button is clicked
