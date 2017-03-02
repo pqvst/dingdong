@@ -61,16 +61,12 @@
 				$("#dingdong-name-row").show();
 				$("#dingdong-message-row").hide();
 				$("#dingdong-submit").text(subscribeButtonText);
-				$("#dingdong-fname").prop("required", true);
-				$("#dingdong-lname").prop("required", true);
 				$("#dingdong-message").prop("required", false);
 			} else {
 				$("#dingdong-subscribe").prop("checked", false);
 				$("#dingdong-name-row").hide();
 				$("#dingdong-message-row").show();
 				$("#dingdong-submit").text(submitButtonText);
-				$("#dingdong-fname").prop("required", false);
-				$("#dingdong-lname").prop("required", false);
 				$("#dingdong-message").prop("required", true);
 			}
 
