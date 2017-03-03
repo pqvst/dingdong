@@ -51,6 +51,12 @@
 		var escapeToCancel = opts.escapeToCancel !== false;
 		var endpoint = opts.endpoint || "/dingdong";
 
+		// event handlers
+		var onSubmit = opts.onSubmit;
+		var onSubmitted = opts.onSubmitted;
+		var onError = opts.onError;
+
+
 		// helper function for showing
 		$.dingdongShow = function (mode) {
 			$("#dingdong-submit").prop("disabled", false);
@@ -229,12 +235,15 @@
 			};
 			function callback(err) {
 				if (err) {
+					if (onError) onError(err, data);
 					$("#dingdong-submit").prop("disabled", false);
 				} else {
+					if (onSubmitted) onSubmitted(data);
 					$.dingdongHide();
 				}
 			}
 			$("#dingdong-submit").prop("disabled", true);
+			if (onSubmit) onSubmit(data);
 			if (opts.handler) {
 				opts.handler(data, callback);
 			} else {
